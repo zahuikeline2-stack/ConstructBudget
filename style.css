@@ -1,0 +1,27 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+header{
+    display: flex;
+    justify-content: space-around;
+    background-color:#0f172a ;
+    height: 100px;
+ }
+ .header1{
+    display: flex;
+    align-items: center;
+    border: #5671b0 solid;
+    width: 40%;
+    justify-content:  space-around;
+    font-size: 1.2rem;
+ }
+ .logo {
+    color: white;
+    font-size: 1.5rem;
+ }
+ .logo span {
+    color: #f59e0b;
+    font-size: 1.5rem;
+ }
