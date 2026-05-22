@@ -1,0 +1,105 @@
+
+header{
+    display: flex;
+    justify-content: space-around;
+    background-color:#0f172a ;
+    height: 100px;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid #1e293b;
+ }
+ #logo h1{
+    color:white;
+    cursor: pointer;
+    font-size: 2.4rem;
+ }
+ #logo span{
+      color: #f59e0b;
+ }
+ #menu nav{
+    display: flex;
+    gap: 50Px;
+ }
+
+ nav a{
+    text-decoration: none;
+    font-size: 1.5rem;
+    color:  rgba(255, 255, 255, 0.5);
+ }
+ nav a:hover, nav a.active{
+    color: #f59e0b;
+ }
+
+.active{
+    color: #f59e0b;
+  }
+  .mobile{
+    display: flex;
+    gap: 50px;
+    font-size: 1.5rem;
+  }
+  .btn1{
+    border: 1px solid rgba(255, 255, 255, 0.5) ;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  .btn2{
+    border: 1px solid #f59e0b ;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    background-color: #f59e0b;
+    border-radius: 5px;
+  }
+
+.entete {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  margin-top: 40px;
+}
+
+.filter {
+    display: flex;
+    gap: 16px;
+}
+
+.filter input {
+    width: 320px;
+    height: 48px;
+    border: 1px solid  #e2e8f0;
+    border-radius: 8px;
+    padding: 0 16px;
+    background-color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+
+}
+
+.filter select {
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 8px;
+    border: 1px solid  #d97706;
+}
+
+select{
+     width: 320px;
+    height: 48px;
+    border: 1px solid  #e2e8f0;
+    border-radius: 8px;
+    padding: 0 16px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+option{
+    font-size: 1.1rem;
+}
+.titre{
+    color: #0f172a;
+    font-size: 3rem;
+}

@@ -9,9 +9,8 @@ header{
     background-color:#0f172a ;
     height: 100px;
     align-items: center;
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
     width: 100%;
     z-index: 1000;
     border-bottom: 1px solid #1e293b;
