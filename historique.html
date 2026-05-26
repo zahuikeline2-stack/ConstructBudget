@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./historique.css">
-    <title>Document</title>
+    <title>Historique – ConstructBudget</title>
 </head>
 <body>
-    <header>
+
+     <header>
         <div id="logo">
             <h1>Construct<span>Bugdet</span></h1>
         </div>
@@ -15,8 +16,8 @@
             <nav>
                 <a href="accueil.html">Accueil</a>
                 <a href="simulateur.html">Simulateur</a>
-                <a href="historique.html" class="active" >Historique</a>
-                <a href="apropos.html">À propos</a>
+                <a href="historique.html" class="active">Historique</a>
+                <a href="apropos.html" >À propos</a>
                 <a href="contact.html">Contact</a>
             </nav>
         </div>
@@ -26,20 +27,76 @@
 
             </div>
     </header>
-    <main>
-        <div class="entete">
-            <h1 class="titre">Simulations Sauvegardées</h1>
-            <div class="filter">
+    <main class="fml3">
+        <div class="jwp6">
+            <h1 class="hyt0">Simulations Sauvegardées</h1>
+            <div class="cqb5">
                 <input type="text" id="Input" placeholder="Rechercher un projet (ex: Villa, Duplex)...">
-                <select id="Select">
+                <select id="filterSelect">
                     <option value="tous">Tous les standings</option>
                     <option value="premium">Premium</option>
                     <option value="standard">Standard</option>
                 </select>
             </div>
         </div>
-        
+
+        <div class="rnx7" id="projectsGrid">
+
+            <div class="ozd1">
+                <div class="lqm4">
+                    <div class="wbf9">🏢</div>
+                    <div class="kse2">
+                        <h3 class="yvn3">Duplex Riviera 4 – Zone R+1</h3>
+                        <p class="tgp5">Créé le 14 Mai 2026 &bull; Surface 240m² &bull; Finition Premium</p>
+                    </div>
+                </div>
+                <div class="mdc6">78 500 000 FCFA</div>
+            </div>
+
+            <div class="ozd1">
+                <div class="lqm4">
+                    <div class="wbf9">🏡</div>
+                    <div class="kse2">
+                        <h3 class="yvn3">Villa Basse Bingerville</h3>
+                        <p class="tgp5">Créé le 02 Avril 2026 &bull; Surface 150m² &bull; Finition Standard</p>
+                    </div>
+                </div>
+                <div class="mdc6">32 000 000 FCFA</div>
+            </div>
+
+            <div class="ozd1">
+                <div class="lqm4">
+                    <div class="wbf9">🏢</div>
+                    <div class="kse2">
+                        <h3 class="yvn3">Immeuble de Rapport Assinie</h3>
+                        <p class="tgp5">Créé le 28 Mars 2026 &bull; Surface 500m² &bull; Finition Luxe</p>
+                    </div>
+                </div>
+                <div class="mdc6">195 000 000 FCFA</div>
+            </div>
+
+        </div>
     </main>
+
+    <script>
+        const input = document.getElementById('searchInput');
+        const select = document.getElementById('filterSelect');
+        const cards = document.querySelectorAll('.ozd1');
+
+        function filterCards() {
+            const query = input.value.toLowerCase();
+            const standing = select.value;
+            cards.forEach(card => {
+                const name = card.querySelector('.yvn3').textContent.toLowerCase();
+                const matchQuery = name.includes(query);
+                const matchStanding = standing === 'tous' || card.dataset.standing === standing;
+                card.style.display = matchQuery && matchStanding ? 'flex' : 'none';
+            });
+        }
+
+        input.addEventListener('input', filterCards);
+        select.addEventListener('change', filterCards);
+    </script>
 
 </body>
 </html>
