@@ -79,82 +79,29 @@ header{
   font-size:2rem;
   color: #0f172a;
   }
- :root {
-  --orange-main: #e69d35; /* L'orange de la ligne et du centre */
-  --orange-light: #f5ebd6; /* L'orange très clair extérieur */
-  --bg-site: #f8f9fa;     /* Ta couleur de fond d'écran */
-}
-
-/* Conteneur principal de la section */
-.timeline-wrapper {
-  position: relative;
+.line {
   max-width: 800px;
   margin: 40px auto;
-  padding-left: 50px; /* Laisse de l'espace à gauche pour la ligne */
+  padding-left: 50px; 
+  position: relative;
 }
-
-/* La ligne verticale orange */
-.timeline-line {
-  position: absolute;
-  top: 15px;      /* Aligne le haut de la ligne avec le premier point */
-  bottom: 15px;   /* Arrête la ligne au niveau du dernier point */
-  left: 20px;     /* Positionne la ligne à gauche */
-  width: 4px;
-  background-color: var(--orange-main);
-  z-index: 1;
-}
-
-/* Conteneur de tes blocs */
-.timeline-events {
+.evenement {
   display: flex;
   flex-direction: column;
-  gap: 40px; /* Espace vertical entre chaque date */
+  gap: 40px;
 }
-
-/* Chaque bloc d'événement (Mars, Avril, Mai) */
 .entet {
   position: relative;
 }
 
-/* --- DESIGN DES POINTS (CERCCLES CONCENTRIQUES) --- */
-
-/* 1. Le grand cercle extérieur clair */
-.entet::before {
-  content: '';
-  position: absolute;
-  left: -38px;  /* Centre le cercle sur la ligne verticale */
-  top: 3px;     /* Aligne verticalement avec le milieu de ton titre h3 */
-  width: 36px;
-  height: 36px;
-  background-color: var(--orange-light);
-  border-radius: 50%;
-  z-index: 2;
-}
-
-/* 2. Le petit cercle orange foncé au milieu */
-.entet::after {
-  content: '';
-  position: absolute;
-  left: -31px;  /* Centrage parfait dans le grand cercle */
-  top: 10px;    /* Centrage parfait dans le grand cercle */
-  width: 18px;
-  height: 18px;
-  background-color: var(--orange-main);
-  border: 2px solid var(--bg-site); /* La coupure blanche/transparente */
-  border-radius: 50%;
-  z-index: 3;
-}
-
-/* --- STYLE DE TON TEXTE (Exemple d'ajustement) --- */
 .entet h3 {
   margin: 0 0 10px 0;
   font-size: 1.3rem;
-  color: var(--orange-main);
+  color: #e69d35;
   line-height: 1.2;
 }
-
 .bloc {
-  background: #ffffff;
+  background: white;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
