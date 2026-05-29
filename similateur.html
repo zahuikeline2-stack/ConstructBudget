@@ -2,144 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=accueil.html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulateur Premium | ConstructBudget</title>
+    <title>Simulateur – ConstructBudget</title>
     <link rel="stylesheet" href="./similateur.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="page-simulateur">
-
-    <!-- HEADER -->
-    <header class="main-header" id="mainHeader">
-        <div class="header-container">
-            <a href="accueil.html" class="logo">Construct<span>Budget</span></a>
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu principal">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            <nav class="nav-menu" id="navMenu">
-                <a href="accueil.html" class="nav-link">Accueil</a>
-                <a href="simulateur.html" class="nav-link active">Simulateur</a>
-                <a href="historique.html" class="nav-link">Historique</a>
-                <a href="apropos.html" class="nav-link">À propos</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+<body>
+    <header>
+        <div id="logo">
+            <h1>Construct<span>Bugdet</span></h1>
+        </div>
+        <div id="menu">
+            <nav>
+                <a href="accueil.html">Accueil</a>
+                <a href="simulateur.html" class="active">Simulateur</a>
+                <a href="historique.html">Historique</a>
+                <a href="apropos.html" >À propos</a>
+                <a href="contact.html">Contact</a>
             </nav>
         </div>
+        <div class="mobile">
+                    <a href="connexion.html" class="btn1">Connexion</a>
+                    <a href="inscription.html" class="btn2">S'inscrire</a>
+
+            </div>
     </header>
+        <div id="entete"><h1>Calculateur Budgétaire Analytique</h1></div>
+        <main>
+            <div id="bloc1">
+                <div id="contenu">
+                    <h2>Paramètres du projet</h2>
+                    <form action="">
+                           <div class="formulaire">
+                             <label for="">Surface au sol bâtie (m²)  </label>  
+                            <input type="number"> 
+                           </div>  
+                           <div class="formulaire">
+                             <label for="">Nombre total de pièces</label>  
+                            <input type="number"> 
+                           </div>
+                           <div class="formulaire">
+                             <label for="">Nombre d'étages (R-plus)</label>  
+                            <input type="number"> 
+                           </div> 
+                           <div class="formulaire">
+                             <label for="">Configuration Architecturale</label>  
+                            <select>
+                    <option value="tous">Duplex Contemporain</option>
+                    <option value="premium">Villa Basse Indivituelle</option>
+                    <option value="standard">Immeuble de Rapport/Résidentiel</option>
+                   </select> 
+                      </div>
+                           <div class="formulaires">
+                             <label for="">Qualité des Finitions</label>  
+                            <select class="ok">
+                    <option value="tous">Standard(Materiaux Locaux)</option>
+                    <option value="premium">Premium(Importation & Domotique)</option>
+                    <option value="standard">Luxe Haut Couture</option>
+                   </select> 
+                           </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                    </form>
+                    </div> 
+                    <button>Générer l'Estimaton analytique</button>
 
-    <!-- SIMULATOR WORKSPACE -->
-    <main class="simulator-wrapper container">
-        <h1 class="dashboard-main-title">Calculateur Budgétaire Analytique</h1>
-        
-        <div class="simulator-grid">
-            <!-- COLONNE FORMULAIRE (PARAMÈTRES) -->
-            <div class="sim-panel card-form-panel">
-                <h2 class="panel-title">Paramètres du projet</h2>
-                <form id="simulatorForm" class="interactive-form">
-                    <div class="form-group-row">
-                        <label for="surfaceTerrain">Surface au sol bâtie (m²)</label>
-                        <input type="number" id="surfaceTerrain" min="20" max="2000" value="120" required>
-                    </div>
-                    
-                    <div class="form-group-row">
-                        <label for="nbPieces">Nombre total de pièces</label>
-                        <input type="number" id="nbPieces" min="1" max="20" value="4" required>
-                    </div>
-
-                    <div class="form-group-row">
-                        <label for="nbEtages">Nombre d'étages (R-plus)</label>
-                        <input type="number" id="nbEtages" min="0" max="5" value="0" required>
-                    </div>
-
-                    <div class="form-group-row">
-                        <label for="typeMaison">Configuration Architecturale</label>
-                        <select id="typeMaison">
-                            <option value="economique">Villa Basse Individuelle</option>
-                            <option value="moderne" selected>Duplex Contemporain</option>
-                            <option value="haut_standing">Immeuble de Rapport / Résidentiel</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group-row">
-                        <label for="niveauFinition">Qualité des Finitions</label>
-                        <select id="niveauFinition">
-                            <option value="standard">Standard (Matériaux Locaux)</option>
-                            <option value="premium" selected>Premium (Importation & Domotique)</option>
-                            <option value="luxe">Luxe Haute Couture</option>
-                        </select>
-                    </div>
-
-                    <button type="button" id="btnCalculer" class="btn btn-primary btn-block">Générer l'estimation analytique</button>
-                </form>
-            </div>
-
-            <!-- COLONNE DASHBOARD DE RÉSULTATS -->
-            <div class="sim-panel card-results-panel" id="resultsDashboard">
-                <h2 class="panel-title">Indicateurs de Performance Budgétaire</h2>
+                </div>
+            <div id="bloc2">
+               <h4>Indicateurs de Performance Budgétaire</h4>
+               <div id="contenue">
+               <h3 id="text">Coût Global Estimé Exclusif</h3>
+               <h3>89957500 FCFA</h3>
+               </div>
+               <div id="contenue2">
                 
-                <div class="stats-hero-card">
-                    <span class="stats-label">Coût Global Estimé Exclusif</span>
-                    <div class="stats-value" id="coutTotalDisplay">0 FCFA</div>
-                </div>
 
-                <div class="results-subgrid">
-                    <!-- Graphique & Progression de performance -->
-                    <div class="visual-progress-card">
-                        <h3 class="card-sub-title">Allocation du capital</h3>
-                        <div class="circular-progress-container">
-                            <svg class="progress-ring" width="160" height="160">
-                                <circle class="progress-ring__circle-bg" stroke="#1e293b" stroke-width="12" fill="transparent" r="70" cx="80" cy="80"/>
-                                <circle class="progress-ring__circle" id="circleProgress" stroke="#f59e0b" stroke-width="12" fill="transparent" r="70" cx="80" cy="80"/>
-                            </svg>
-                            <div class="progress-text-center" id="progressPercent">100%</div>
-                        </div>
-                    </div>
+               </div>
 
-                    <!-- Quantités estimées -->
-                    <div class="materials-summary-card">
-                        <h3 class="card-sub-title">Matériaux Critiques (Gros Œuvre)</h3>
-                        <ul class="materials-list">
-                            <li><span>Ciment (Tonnes) :</span> <strong id="matCiment">0</strong></li>
-                            <li><span>Acier de Haute Adhérence (Kg) :</span> <strong id="matAcier">0</strong></li>
-                            <li><span>Sable de Lagune (m³) :</span> <strong id="matSable">0</strong></li>
-                            <li><span>Gravier Concassé (m³) :</span> <strong id="matGravier">0</strong></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Répartition des étapes de décaissement -->
-                <div class="phases-breakdown">
-                    <h3 class="card-sub-title">Phasage prévisionnel des flux financiers</h3>
-                    <div class="phase-item">
-                        <div class="phase-info"><span>Fondations & Infrastructures (30%)</span><span id="p1Val">0 F</span></div>
-                        <div class="phase-bar"><div class="phase-fill" style="width: 30%; background: #f59e0b;"></div></div>
-                    </div>
-                    <div class="phase-item">
-                        <div class="phase-info"><span>Élévations & Gros Œuvre (45%)</span><span id="p2Val">0 F</span></div>
-                        <div class="phase-bar"><div class="phase-fill" style="width: 45%; background: #38bdf8;"></div></div>
-                    </div>
-                    <div class="phase-item">
-                        <div class="phase-info"><span>Second Œuvre & Finitions (25%)</span><span id="p3Val">0 F</span></div>
-                        <div class="phase-bar"><div class="phase-fill" style="width: 25%; background: #34d399;"></div></div>
-                    </div>
-                </div>
             </div>
-        </div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="main-footer">
-        <div class="footer-container">
-            <div class="footer-brand">
-                <a href="accueil.html" class="logo">Construct<span>Budget</span></a>
-                <p class="footer-desc">Plateforme tech premium dédiée à la sécurisation financière des chantiers immobiliers.</p>
-            </div>
-            <p class="footer-bottom-text">&copy; 2026 ConstructBudget.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+        </main>
+    
+    
 </body>
 </html>
