@@ -61,7 +61,7 @@ header{
     background-color: #f59e0b;
     border-radius: 5px;
   }
-.fml3 {
+.corps {
     width: 1200px;
     max-width: 100%;
     margin: 0 auto;
@@ -69,25 +69,25 @@ header{
 }
 
 
-.jwp6 {
+.entete {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
 }
 
-.jwp6 .hyt0 {
+.entete .pied{
     font-size: 36px;
     font-weight: 700;
     color: #0f172a;
 }
 
-.cqb5 {
+.selction {
     display: flex;
     gap: 16px;
 }
 
-.cqb5 input {
+.selction input {
     width: 320px;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
@@ -99,12 +99,12 @@ header{
     transition: all 0.3s ease;
 }
 
-.cqb5 input:focus {
+.selction input:focus {
     border-color: #f59e0b;
     box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
 }
 
-.cqb5 select {
+.selction select {
     height: 48px;
     padding: 0 16px;
     border-radius: 8px;
@@ -118,13 +118,13 @@ header{
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
-.rnx7 {
+.element {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.ozd1 {
+.maison {
     background-color: #ffffff;
     border-radius: 12px;
     padding: 24px 32px;
@@ -136,18 +136,18 @@ header{
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ozd1:hover {
+.maison:hover {
     transform: translateX(6px);
     border-color: #f59e0b;
 }
 
-.ozd1 .lqm4 {
+.maison .info {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.ozd1 .wbf9 {
+.maison .icon{
     font-size: 22px;
     background-color: #f1f5f9;
     width: 52px;
@@ -158,65 +158,126 @@ header{
     border-radius: 50%;
 }
 
-.ozd1 .kse2 {
+.maison .desc {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.ozd1 .yvn3 {
+.maison .logement {
     font-size: 18px;
     font-weight: 600;
     color: #0f172a;
 }
 
-.ozd1 .tgp5 {
+.maison .date {
     font-size: 13px;
-    color: #64748b;
 }
 
-.ozd1 .mdc6 {
+.maison .prix {
     padding: 10px 20px;
-    background-color: #f0fdf4;
-    color: #166534;
+    background-color: #f59e0b;
+    color: white;
     font-weight: 700;
     border-radius: 30px;
     font-size: 15px;
-    border: 1px solid #bbf7d0;
+    border: none;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .xkr9 {
-        padding: 0 20px;
+@media (max-width: 1023px) {
+    header {
+        height: auto;
+        padding: 20px 15px;
+        flex-direction: column;
+        gap: 20px;
     }
-
-    .xkr9 .vtn5 {
-        display: none;
+    #menu nav, .mobile {
+        gap: 30px;
     }
-
-    .fml3 {
-        padding-top: 110px;
+    .corps {
+        padding-top: 40px;
     }
-
-    .jwp6 {
+    .entete {
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
     }
+    .selction {
+        width: 100%;
+    }
+    .selction input {
+        flex: 1;
+        width: auto;
+    }
+}
 
-    .cqb5 {
+@media (max-width: 767px) {
+    #logo h1 {
+        font-size: 2rem;
+    }
+    nav a, .mobile {
+        font-size: 1.2rem;
+    }
+    #menu nav, .mobile {
+        gap: 15px;
+    }
+    .btn1, .btn2 {
+        padding: 10px 16px;
+    }
+    .entete .pied {
+        font-size: 28px;
+    }
+    .selction {
         flex-direction: column;
-        width: 100%;
+        gap: 12px;
     }
-
-    .cqb5 input {
+    .selction input, .selction select {
         width: 100%;
+        height: 48px;
     }
-
-    .ozd1 {
+    .maison {
         flex-direction: column;
         align-items: flex-start;
-        gap: 16px;
+        gap: 20px;
+        padding: 20px;
+    }
+    .maison .prix {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 380px) {
+    #logo h1 {
+        font-size: 1.7rem;
+    }
+    #menu nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    nav a {
+        font-size: 1rem;
+    }
+    .mobile {
+        gap: 10px;
+        font-size: 1rem;
+    }
+    .btn1, .btn2 {
+        padding: 8px 12px;
+    }
+    .entete .pied {
+        font-size: 24px;
+    }
+    .maison .info {
+        gap: 12px;
+    }
+    .maison .icon {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+    .maison .logement {
+        font-size: 16px;
     }
 }

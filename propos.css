@@ -118,3 +118,72 @@ header{
   font-size: 0.95rem;
   line-height: 1.5;
 }
+@media (max-width: 1023px) {
+    header {
+        height: auto;
+        padding: 20px 15px;
+        flex-direction: column;
+        gap: 20px;
+    }
+    #menu nav, .mobile {
+        gap: 30px;
+    }
+    .line {
+        max-width: 90%;
+        padding-left: 30px;
+    }
+}
+
+@media (max-width: 767px) {
+    #logo h1 {
+        font-size: 2rem;
+    }
+    nav a, .mobile {
+        font-size: 1.2rem;
+    }
+    #menu nav, .mobile {
+        gap: 15px;
+    }
+    .btn1, .btn2 {
+        padding: 10px 16px;
+    }
+    .entete, h1 {
+        font-size: 2.2rem;
+    }
+    .entete, h2 {
+        font-size: 1.6rem;
+    }
+    .line {
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 380px) {
+    #logo h1 {
+        font-size: 1.7rem;
+    }
+    #menu nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    nav a {
+        font-size: 1rem;
+    }
+    .mobile {
+        gap: 10px;
+        font-size: 1rem;
+    }
+    .btn1, .btn2 {
+        padding: 8px 12px;
+    }
+    .entete, h1 {
+        font-size: 1.8rem;
+    }
+    .line {
+        padding-left: 15px;
+    }
+    .bloc {
+        padding: 15px;
+    }
+}

@@ -74,3 +74,21 @@ button{
   #insc{
     color: #f59e0b;
   }
+
+@media (max-width: 767px) {
+    #connexion {
+        padding: 30px;
+    }
+    h3, p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 380px) {
+    #connexion {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+}

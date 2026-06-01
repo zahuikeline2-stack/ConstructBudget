@@ -133,3 +133,73 @@ header{
     font-size: 1.1rem;
 
   }
+  @media (max-width: 1023px) {
+    header {
+        height: auto;
+        padding: 20px 15px;
+        flex-direction: column;
+        gap: 20px;
+    }
+    #menu nav, .mobile {
+        gap: 30px;
+    }
+    main {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        padding: 0 20px;
+    }
+    #contact1 {
+        width: 100%;
+    }
+    .contact-detail {
+        width: 100%;
+        height: auto;
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    #logo h1 {
+        font-size: 2rem;
+    }
+    nav a, .mobile {
+        font-size: 1.2rem;
+    }
+    #menu nav, .mobile {
+        gap: 15px;
+    }
+    .btn1, .btn2 {
+        padding: 10px 16px;
+    }
+    #contact1 h1 {
+        font-size: 2.2rem;
+    }
+    .para {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 380px) {
+    #logo h1 {
+        font-size: 1.7rem;
+    }
+    #menu nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    nav a {
+        font-size: 1rem;
+    }
+    .mobile {
+        gap: 10px;
+        font-size: 1rem;
+    }
+    .btn1, .btn2 {
+        padding: 8px 12px;
+    }
+    #contact1 h1 {
+        font-size: 1.8rem;
+    }
+}

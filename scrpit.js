@@ -1,247 +1,147 @@
-/**
- * CONSTRUCTBUDGET - CORE APP ENGINE
- * Logiciel d'ingénierie financière immobilière et d'interaction UI
- */
 
-document.addEventListener("DOMContentLoaded", () => {
-    initNavigation();
-    initScrollAnimations();
-    
-    // Initialisation conditionnelle selon la page active
-    if (document.getElementById("btnCalculer")) initSimulator();
-    if (document.getElementById("contactForm")) initContactForm();
-    if (document.getElementById("registerForm")) initRegisterForm();
-    if (document.getElementById("searchInput")) initHistoryFilter();
+// Coût moyen de construction par m² selon finition (FCFA/m²)
+const COUT_M2 = {
+  "Standard(Materiaux Locaux)":  150000,   
+  "Premium(Importation & Domotique)": 280000,
+  "Luxe Haut Couture": 480000,             
+};
+
+// Multiplicateur selon la configuration architecturale
+const COEFF_CONFIG = {
+  "Duplex Contemporain":          1.15,
+  "Villa Basse Indivituelle":     1.00,
+  "Immeuble de Rapport/Résidentiel": 1.25,
+};
+
+// Multiplicateur selon le nombre d'étages (chaque étage supplémentaire coûte plus cher)
+function coeffEtages(nbEtages) {
+  if (nbEtages <= 0) return 1.00;
+  if (nbEtages === 1) return 1.20;
+  if (nbEtages === 2) return 1.38;
+  return 1.38 + (nbEtages - 2) * 0.12; 
+}
+
+// Majoration légère selon le nombre de pièces (plomberie, électricité)
+function coeffPieces(nbPieces) {
+  if (nbPieces <= 4)  return 1.00;
+  if (nbPieces <= 7)  return 1.05;
+  if (nbPieces <= 10) return 1.10;
+  return 1.15;
+}
+
+function calculerMateriaux(surfaceTotale, qualite) {
+
+  let cimentTonne, acierKg, sableM3, gravierM3;
+
+  if (qualite === "Standard(Materiaux Locaux)") {
+    cimentTonne = 0.14;  
+    acierKg     = 18;    
+    sableM3     = 0.09;  
+    gravierM3   = 0.07;   
+  } else if (qualite === "Premium(Importation & Domotique)") {
+    cimentTonne = 0.16;
+    acierKg     = 22;
+    sableM3     = 0.10;
+    gravierM3   = 0.08;
+  } else { 
+    cimentTonne = 0.18;
+    acierKg     = 26;
+    sableM3     = 0.11;
+    gravierM3   = 0.09;
+  }
+
+  return {
+    ciment:  Math.round(surfaceTotale * cimentTonne),
+    acier:   Math.round(surfaceTotale * acierKg),
+    sable:   Math.round(surfaceTotale * sableM3),
+    gravier: Math.round(surfaceTotale * gravierM3),
+  };
+}
+
+// --- Formatage des nombres en FCFA ---
+function formatFCFA(n) {
+  return n.toLocaleString("fr-FR") + " FCFA";
+}
+
+
+//  Fonction principale appelée au clic du bouton
+function genererEstimation() {
+
+  // 1. Récupérer les valeurs du formulaire
+  const inputs   = document.querySelectorAll("input[type='number']");
+  const selects  = document.querySelectorAll("select");
+
+  const surface  = parseFloat(inputs[0].value)  || 0;
+  const pieces   = parseInt(inputs[1].value)    || 0;
+  const etages   = parseInt(inputs[2].value)    || 0;
+
+  const config   = selects[0].value;
+  const qualite  = selects[1].value;
+
+  // 2. Validation basique
+  if (surface <= 0) {
+    alert("Veuillez saisir une surface au sol valide (m²).");
+    return;
+  }
+  if (pieces <= 0) {
+    alert("Veuillez indiquer le nombre de pièces.");
+    return;
+  }
+
+  // 3. Calcul du coût global
+  const surfaceTotale  = surface * (etages + 1);         
+  const prixBase       = COUT_M2[qualite] || 150000;
+  const cCoeff         = COEFF_CONFIG[config] || 1.00;
+  const eCoeff         = coeffEtages(etages);
+  const pCoeff         = coeffPieces(pieces);
+
+  const coutGlobal = Math.round(surfaceTotale * prixBase * cCoeff * eCoeff * pCoeff);
+
+  // 4. Calcul des matériaux
+  const mat = calculerMateriaux(surfaceTotale, qualite);
+
+  // 5. Mettre à jour l'affichage
+  //    Coût global
+  const coutEl = document.querySelector("#contenue h3:not(#text)");
+  if (coutEl) coutEl.textContent = formatFCFA(coutGlobal);
+
+  //    Matériaux — les spans dans les h3.element
+  const spans = document.querySelectorAll("h3.element span");
+  if (spans.length >= 4) {
+    spans[0].textContent = mat.ciment.toLocaleString("fr-FR");
+    spans[1].textContent = mat.acier.toLocaleString("fr-FR");
+    spans[2].textContent = mat.sable.toLocaleString("fr-FR");
+    spans[3].textContent = mat.gravier.toLocaleString("fr-FR");
+  }
+
+  // 6. Animation visuelle (optionnel : met en évidence les résultats)
+  const bloc2 = document.getElementById("bloc2");
+  if (bloc2) {
+    bloc2.style.transition = "box-shadow 0.3s ease";
+    bloc2.style.boxShadow  = "0 0 0 3px #f0a500";
+    setTimeout(() => { bloc2.style.boxShadow = "none"; }, 800);
+  }
+}
+//  Branchement du bouton au chargement de la page
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.querySelector("button");
+  if (btn) {
+    btn.addEventListener("click", genererEstimation);
+  }
 });
 
-/* ==========================================================================
-   MODULE 1 : NAVIGATION RESPONSIVE & COMPORTEMENT HEADER
-   ========================================================================== */
-function initNavigation() {
-    const mainHeader = document.getElementById("mainHeader");
-    const mobileToggle = document.getElementById("mobileToggle");
-    const navMenu = document.getElementById("navMenu");
 
-    // Sticky Navbar au défilement
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-            mainHeader.classList.add("scrolled");
-        } else {
-            mainHeader.classList.remove("scrolled");
-        }
-    });
+///Connexion
+//selecionner les input
+const formulaire = document.querySelector('form');
+const emailInput = document.querySelector('input[type="email"]');
+const passwordInput = document.querySelector('input[type="password"]');
+//ecouter l evenement
+formulaire.addEventListener('submit', function(e) {
+    e.preventDefault();
+// supprimer les valeur
+    emailInput.value = '';
+    passwordInput.value = '';
+});
 
-    // Menu Mobile
-    if (mobileToggle && navMenu) {
-        mobileToggle.addEventListener("click", () => {
-            navMenu.classList.toggle("open");
-            mobileToggle.classList.toggle("active");
-            
-            // Animation du bouton hamburger
-            const bars = mobileToggle.querySelectorAll(".bar");
-            if (mobileToggle.classList.contains("active")) {
-                bars[0].style.transform = "rotate(-45deg) translate(-5px, 6px)";
-                bars[1].style.opacity = "0";
-                bars[2].style.transform = "rotate(45deg) translate(-5px, -6px)";
-            } else {
-                bars[0].style.transform = "none";
-                bars[1].style.opacity = "1";
-                bars[2].style.transform = "none";
-            }
-        });
-    }
-}
 
-/* ==========================================================================
-   MODULE 2 : ANIMATIONS D'APPARITION AU SCROLL
-   ========================================================================== */
-function initScrollAnimations() {
-    const targets = document.querySelectorAll(".animate-on-scroll");
-    
-    if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.15 });
-
-        targets.forEach(target => observer.observe(target));
-    } else {
-        // Fallback pour les anciens navigateurs
-        targets.forEach(target => target.classList.add("visible"));
-    }
-}
-
-/* ==========================================================================
-   MODULE 3 : ALGORITHME DU SIMULATEUR BUDGÉTAIRE INTERACTIF
-   ========================================================================== */
-function initSimulator() {
-    const btnCalculer = document.getElementById("btnCalculer");
-    const circle = document.getElementById("circleProgress");
-    
-    if (!circle) return;
-    
-    // Configuration de la bague de progression SVG
-    const radius = circle.r.baseVal.value;
-    const circumference = radius * 2 * Math.PI;
-    circle.style.strokeDasharray = `${circumference} ${circumference}`;
-    circle.style.strokeDashoffset = circumference;
-
-    function setProgress(percent) {
-        const offset = circumference - (percent / 100) * circumference;
-        circle.style.strokeDashoffset = offset;
-    }
-
-    btnCalculer.addEventListener("click", () => {
-        // Capture des entrées utilisateurs
-        const surface = parseFloat(document.getElementById("surfaceTerrain").value);
-        const pieces = parseInt(document.getElementById("nbPieces").value);
-        const etages = parseInt(document.getElementById("nbEtages").value);
-        const typeMaison = document.getElementById("typeMaison").value;
-        const finition = document.getElementById("niveauFinition").value;
-
-        // Validation de cohérence de base
-        if (isNaN(surface) || surface <= 0) {
-            alert("Veuillez renseigner une surface au sol valide.");
-            return;
-        }
-
-        // Matrice de calcul des coûts unitaires de base (au m²)
-        let coutBaseM2 = 250000; // Tarif de base standard en FCFA
-        
-        if (typeMaison === "moderne") coutBaseM2 = 380000;
-        if (typeMaison === "haut_standing") coutBaseM2 = 550000;
-
-        // Coefficients multiplicateurs de finition
-        let coeffFinition = 1.0;
-        if (finition === "premium") coeffFinition = 1.35;
-        if (finition === "luxe") coeffFinition = 1.75;
-
-        // Prise en compte de la surface cumulée avec les étages
-        const surfaceTotaleBatie = surface * (1 + (etages * 0.85));
-        
-        // Calcul du coût global brut
-        let coutGlobal = surfaceTotaleBatie * coutBaseM2 * coeffFinition;
-        // Ajustement mineur selon le nombre de pièces
-        coutGlobal += pieces * 400000;
-
-        // Affichage fluide et formatage monétaire
-        animateValue("coutTotalDisplay", 0, coutGlobal, 1000, " FCFA");
-
-        // Calcul et affichage du quantitatif des matériaux critiques
-        const tonnesCiment = Math.ceil(surfaceTotaleBatie * 0.35 * (1 + (etages * 0.1)));
-        const kgAcier = Math.ceil(surfaceTotaleBatie * 28 * (1 + (etages * 0.25)));
-        const m3Sable = Math.ceil(surfaceTotaleBatie * 0.45);
-        const m3Gravier = Math.ceil(surfaceTotaleBatie * 0.6);
-
-        document.getElementById("matCiment").innerText = tonnesCiment;
-        document.getElementById("matAcier").innerText = kgAcier.toLocaleString();
-        document.getElementById("matSable").innerText = m3Sable;
-        document.getElementById("matGravier").innerText = m3Gravier;
-
-        // Répartition financière par phases architecturales
-        document.getElementById("p1Val").innerText = (coutGlobal * 0.30).toLocaleString() + " F";
-        document.getElementById("p2Val").innerText = (coutGlobal * 0.45).toLocaleString() + " F";
-        document.getElementById("p3Val").innerText = (coutGlobal * 0.25).toLocaleString() + " F";
-
-        // Déclenchement de l'animation de la bague de progression (simulant 100% de complétion de l'analyse)
-        setProgress(100);
-    });
-}
-
-// Fonction d'animation de compteur numérique
-function animateValue(id, start, end, duration, suffix = "") {
-    const obj = document.getElementById(id);
-    if (!obj) return;
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const currentValue = Math.floor(progress * (end - start) + start);
-        obj.innerHTML = currentValue.toLocaleString() + suffix;
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
-}
-
-/* ==========================================================================
-   MODULE 4 : FILTRAGE ANALYTIQUE DE L'HISTORIQUE DES PROJETS
-   ========================================================================== */
-function initHistoryFilter() {
-    const searchInput = document.getElementById("searchInput");
-    const filterSelect = document.getElementById("filterSelect");
-    const projectCards = document.querySelectorAll(".project-row-card");
-
-    function filterProjects() {
-        const query = searchInput.value.toLowerCase();
-        const selectedStanding = filterSelect.value;
-
-        projectCards.forEach(card => {
-            const projectName = card.querySelector(".p-name").innerText.toLowerCase();
-            const standing = card.getAttribute("data-standing");
-            
-            const matchSearch = projectName.includes(query);
-            const matchStanding = (selectedStanding === "tous" || standing === selectedStanding);
-
-            if (matchSearch && matchStanding) {
-                card.style.display = "flex";
-            } else {
-                card.style.display = "none";
-            }
-        });
-    }
-
-    if (searchInput && filterSelect) {
-        searchInput.addEventListener("input", filterProjects);
-        filterSelect.addEventListener("change", filterProjects);
-    }
-}
-
-/* ==========================================================================
-   MODULE 5 : VALIDATION SÉCURISÉE DES FORMULAIRES (CONTACT & INSCRIPTION)
-   ========================================================================== */
-function initContactForm() {
-    const form = document.getElementById("contactForm");
-    const feedback = document.getElementById("contactFeedback");
-
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        feedback.style.color = "#34d399";
-        feedback.innerText = "Transmission en cours sécurisée via protocole HTTPS...";
-        
-        setTimeout(() => {
-            feedback.innerText = "Votre cahier des charges a été transmis avec succès à nos ingénieurs.";
-            form.reset();
-        }, 1500);
-    });
-}
-
-function initRegisterForm() {
-    const form = document.getElementById("registerForm");
-    const feedback = document.getElementById("registerFeedback");
-
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const pass = document.getElementById("regPassword").value;
-        const confirm = document.getElementById("regPasswordConfirm").value;
-
-        if (pass !== confirm) {
-            feedback.style.color = "#f87171";
-            feedback.innerText = "Erreur : Les mots de passe saisis ne sont pas identiques.";
-            return;
-        }
-
-        feedback.style.color = "#34d399";
-        feedback.innerText = "Création du compte utilisateur premium en cours...";
-        
-        setTimeout(() => {
-            alert("Compte ConstructBudget créé avec succès ! Bienvenue sur la plateforme.");
-            window.location.href = "connexion.html";
-        }, 1500);
-    });
-}

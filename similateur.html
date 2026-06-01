@@ -13,16 +13,16 @@
         </div>
         <div id="menu">
             <nav>
-                <a href="accueil.html">Accueil</a>
-                <a href="simulateur.html" class="active">Simulateur</a>
-                <a href="historique.html">Historique</a>
-                <a href="apropos.html" >À propos</a>
-                <a href="contact.html">Contact</a>
+                <a href="./index.html">Accueil</a>
+                <a href="" class="active">Simulateur</a>
+                <a href="./historique.html">Historique</a>
+                <a href="./propos.html" >À propos</a>
+                <a href="./contact.html">Contact</a>
             </nav>
         </div>
         <div class="mobile">
-                    <a href="connexion.html" class="btn1">Connexion</a>
-                    <a href="inscription.html" class="btn2">S'inscrire</a>
+                    <a href="./connexion.html" class="btn1">Connexion</a>
+                    <a href="./inscrire.html" class="btn2">S'inscrire</a>
 
             </div>
     </header>
@@ -34,15 +34,15 @@
                     <form action="">
                            <div class="formulaire">
                              <label for="">Surface au sol bâtie (m²)  </label>  
-                            <input type="number"> 
+                            <input type="number" min="0"> 
                            </div>  
                            <div class="formulaire">
                              <label for="">Nombre total de pièces</label>  
-                            <input type="number"> 
+                            <input type="number" min="0"> 
                            </div>
                            <div class="formulaire">
                              <label for="">Nombre d'étages (R-plus)</label>  
-                            <input type="number"> 
+                            <input type="number" min="0"> 
                            </div> 
                            <div class="formulaire">
                              <label for="">Configuration Architecturale</label>  
@@ -69,15 +69,23 @@
                <h4>Indicateurs de Performance Budgétaire</h4>
                <div id="contenue">
                <h3 id="text">Coût Global Estimé Exclusif</h3>
-               <h3>89957500 FCFA</h3>
+               <h3>0 FCFA</h3>
                </div>
                <div id="contenue2">
+                <div id="contenue">
+               <h3 id="text">Matériaux Critiques (Gros Œuvre)</h3>
+               <h3 class="element">Ciment (Tonnes) : <span>0</span></h3>
+               <h3 class="element">Acier de Haute Adhérence (Kg) :<span>0 </span></h3>
+               <h3 class="element">Sable de Lagune (m³) : <span>0</span></h3>
+               <h3 class="element">Gravier Concassé (m³) : <span>0</span></h3>
+               </div>
                 
 
                </div>
 
             </div>
         </main>
+        <script src="./scrpit.js"></script>
     
     
 </body>

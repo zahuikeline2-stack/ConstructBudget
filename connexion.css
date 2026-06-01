@@ -76,3 +76,34 @@ button{
   #insc{
     color: #f59e0b;
   }
+  @media (max-width: 767px) {
+    body {
+        margin-top: 20%;
+    }
+    #connexion {
+        width: 88%;
+        padding: 32px;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+    h3, p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 380px) {
+    body {
+        margin-top: 15%;
+    }
+    #connexion {
+        width: 95%;
+        padding: 24px 16px;
+    }
+    input {
+        height: 45px;
+    }
+    button {
+        padding: 12px;
+    }
+}

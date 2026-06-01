@@ -5,24 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil – ConstructBudget</title>
     <link rel="stylesheet" href="./style.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
       <header>
         <div id="logo">
             <h1>Construct<span>Bugdet</span></h1>
         </div>
+     
+
+
+        <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
         <div id="menu">
             <nav>
-                <a href="accueil.html" class="active">Accueil</a>
-                <a href="simulateur.html">Simulateur</a>
-                <a href="historique.html">Historique</a>
-                <a href="apropos.html" >À propos</a>
-                <a href="contact.html">Contact</a>
+                <a href="" class="active">Accueil</a>
+                <a href="./similateur.html">Simulateur</a>
+                <a href="./historique.html">Historique</a>
+                <a href="./propos.html" >À propos</a>
+                <a href="./contact.html">Contact</a>
             </nav>
         </div>
         <div class="mobile">
-                    <a href="connexion.html" class="btn1">Connexion</a>
-                    <a href="inscription.html" class="btn2">S'inscrire</a>
+                    <a href="./connexion.html" class="btn1">Connexion</a>
+                    <a href="./inscrire.html" class="btn2">S'inscrire</a>
 
             </div>
     </header>
@@ -32,8 +42,8 @@
             <h1 class="hero-titre">Construisez avec un budget maîtrisé</h1>
             <p class="hero-sous">Estimez vos coûts réels, gérez vos matériaux en temps réel et protégez vos chantiers contre les imprévus financiers.</p>
             <div class="hero-btn">
-                <a href="" class="btn-hero1">Commencer l'estimation</a>
-                <a href="" class="btn-hero2">Découvrir les solutions</a>
+                <a href="./similateur.html" class="btn-hero1">Commencer l'estimation</a>
+                <a href="./propos.html" class="btn-hero2">Découvrir les solutions</a>
             </div>
         </div>
     </div>
@@ -106,9 +116,9 @@
             <div class="footer-group">
                 <h4 class="footer-titre">Navigation</h4>
                 <ul class="footer-card">
-                    <li><a href="accueil.html">Accueil</a></li>
-                    <li><a href="simulateur.html">Simulateur</a></li>
-                    <li><a href="historique.html">Historique</a></li>
+                    <li><a href="./index.html">Accueil</a></li>
+                    <li><a href="./similateur.html">Simulateur</a></li>
+                    <li><a href="./historique.html">Historique</a></li>
                 </ul>
             </div>
             <div class="footer-group">
@@ -122,9 +132,9 @@
             <div class="footer-group">
                 <h4 class="footer-titre">Contact</h4>
                 <ul class="footer-contact">
-                    <li>📍 Abidjan, Côte d'Ivoire</li>
-                    <li>✉️ contact@constructbudget.ci</li>
-                    <li>📞 +225 07 00 00 00 00</li>
+                    <li><i class="fa-solid fa-map-pin" style="color: rgb(255, 45, 1);"></i> Abidjan, Côte d'Ivoire</li>
+                    <li><i class="fa-regular fa-envelope" style="color: rgb(238, 238, 238);"></i> contact@constructbudget.ci</li>
+                    <li><i class="fa-solid fa-phone" style="color: rgb(44, 123, 123);"></i> +225 07 00 00 00 00</li>
                 </ul>
             </div>
         </div>
@@ -132,5 +142,24 @@
             <p> 2026 ConstructBudget. Tous droits réservés. Réalisation d'Excellence.</p>
         </div> 
     </footer>
+
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const header = document.querySelector('header');
+
+        hamburger.addEventListener('click', () => {
+            header.classList.toggle('open');
+            hamburger.classList.toggle('active');
+        });
+
+        // Fermer le menu au clic sur un lien
+        document.querySelectorAll('#menu nav a, .mobile a').forEach(link => {
+            link.addEventListener('click', () => {
+                header.classList.remove('open');
+                hamburger.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
